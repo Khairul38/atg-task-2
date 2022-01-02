@@ -13,7 +13,7 @@ const Home = () => {
     const onSubmit = (data, id) => {
         const proceed = window.confirm('Are You Sure, You Want To Like');
         if (proceed) {
-            const url = `http://localhost:5000/posts/${id}/comments`;
+            const url = `https://shrouded-stream-50106.herokuapp.com/posts/${id}/comments`;
             fetch(url, {
                 method: 'PUT',
                 headers: {
@@ -36,7 +36,7 @@ const Home = () => {
         const like = Number(likes) + 1;
         const proceed = window.confirm('Are You Sure, You Want To Like');
         if (proceed) {
-            const url = `http://localhost:5000/posts/${id}`;
+            const url = `https://shrouded-stream-50106.herokuapp.com/posts/${id}`;
             fetch(url, {
                 method: 'PUT',
                 headers: {
@@ -57,7 +57,7 @@ const Home = () => {
     const handleDeletePost = (id) => {
         const proceed = window.confirm('Are You Sure, You Want To Delete Post');
         if (proceed) {
-            const url = `http://localhost:5000/posts/${id}`;
+            const url = `https://shrouded-stream-50106.herokuapp.com/posts/${id}`;
             fetch(url, {
                 method: 'DELETE'
             })

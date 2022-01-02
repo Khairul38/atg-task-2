@@ -24,7 +24,7 @@ const UpdatePost = () => {
         const proceed = window.confirm('Are You Sure, You Want To Update Post');
         if (proceed) {
             setProcessing(true);
-            const url = `http://localhost:5000/posts/${postId}/update`;
+            const url = `https://shrouded-stream-50106.herokuapp.com/posts/${postId}/update`;
             fetch(url, {
                 method: 'PUT',
                 body: formData

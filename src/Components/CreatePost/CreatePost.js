@@ -20,7 +20,7 @@ const CreatePost = () => {
         const proceed = window.confirm('Are You Sure, You Want To Create Post');
         if (proceed) {
             setProcessing(true)
-            axios.post('http://localhost:5000/posts', formData)
+            axios.post('https://shrouded-stream-50106.herokuapp.com/posts', formData)
                 .then(res => {
                     if (res.data.insertedId) {
                         setProcessing(false);
