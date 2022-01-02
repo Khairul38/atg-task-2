@@ -1,15 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useAuth from '../../Hooks/useAuth/useAuth';
 import Logo from '../../images/logo.png';
 import './Header.css';
 
 const Header = () => {
-    // const { allContext } = useAuth();
-    // const { user, ColorButton, logout } = allContext;
+    const { allContext } = useAuth();
+    const { user, logout } = allContext;
     return (
         <div className="sticky-top">
             <nav className="navbar navbar-expand-md navbar-light bg-light">
-                <div className="container-fluid">
+                <div className="container">
                     <Link className="navbar-brand me-5" to="/">
                         <img src={Logo} alt="" />
                     </Link>
@@ -22,13 +23,8 @@ const Header = () => {
                                 <Link className="nav-link active" aria-current="page" to="/home">Home</Link>
                             </li>
                         </ul>
-                        {/* {user.email ?
+                        {user.email ?
                             <>
-                                <li className="navbar-nav nav-item me-3">
-                                    <Link className="nav-link" to="/dashboard">
-                                        Dashboard
-                                    </Link>
-                                </li>
                                 <h5 className="me-3 my-2 text-color">{user.displayName}</h5>
                                 <button type="button" className="btn btn-primary"
                                     onClick={logout} >Logout</button>
@@ -40,7 +36,7 @@ const Header = () => {
                                 <Link to="/signUp" ><button
                                     type="button" className="btn btn-primary">SignUp</button>
                                 </Link>
-                            </div>} */}
+                            </div>}
                     </div>
                 </div>
             </nav>

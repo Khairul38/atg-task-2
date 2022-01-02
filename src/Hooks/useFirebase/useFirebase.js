@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getAuth, signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut, onAuthStateChanged } from "firebase/auth";
 import initializeFirebase from '../../Firebase/Firebase.init';
-import { Button } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { orange } from '@mui/material/colors';
 
 initializeFirebase();
 
@@ -16,26 +13,6 @@ const useFirebase = () => {
 
     const auth = getAuth();
 
-    /* Provider */
-    const googleProvider = new GoogleAuthProvider();
-
-    /* Google Login/Register */
-    const loginUsingGoogle = (location, navigate) => {
-        setIsLoading(true);
-        signInWithPopup(auth, googleProvider)
-            .then(result => {
-                const user = result.user
-                setUser(user);
-                saveUser(user.email, user.displayName, 'PUT');
-                setError('');
-                const redirect = location?.state?.from || '/';
-                navigate(redirect);
-            })
-            .catch(error => {
-                setError(error.message);
-            })
-            .finally(() => setIsLoading(false));
-    }
 
     /* Display Name/User Name */
     const setUserName = (name) => {
@@ -116,7 +93,7 @@ const useFirebase = () => {
     /* Save user to database */
     const saveUser = (email, displayName, method) => {
         const user = { email, displayName };
-        fetch('https://aqueous-stream-28542.herokuapp.com/users', {
+        fetch('https://shrouded-stream-50106.herokuapp.com/users', {
             method: method,
             headers: {
                 'content-type': 'application/json'
@@ -126,25 +103,7 @@ const useFirebase = () => {
             .then()
     }
 
-    /* Find Admin */
-    useEffect(() => {
-        setLoading(true);
-        fetch(`https://aqueous-stream-28542.herokuapp.com/users/${user.email}`)
-            .then(res => res.json())
-            .then(data => setAdmin(data.admin))
-            .finally(() => setLoading(false));
-    }, [user.email])
-
-    // Customized Button
-    const ColorButton = styled(Button)(({ theme }) => ({
-        color: theme.palette.getContrastText(orange[200]),
-        backgroundColor: orange[200],
-        '&:hover': {
-            backgroundColor: orange[300],
-        },
-    }));
-
-    return { user, error, admin, isLoading, ColorButton, loading, setError, setUser, setUserName, setIsLoading, loginUsingGoogle, handleRegistration, handleLogin, logout }
+    return { user, error, admin, isLoading, loading, setError, setUser, setUserName, setIsLoading, handleRegistration, handleLogin, logout }
 };
 
 export default useFirebase;
